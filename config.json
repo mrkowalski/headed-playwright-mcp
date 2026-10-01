@@ -1,0 +1,22 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "userDataDir": "/home/node/profile",
+    "launchOptions": {
+      "headless": false,
+      "args": ["--window-size=1920,1080"]
+    },
+    "contextOptions": {
+      "locale": "pl-PL",
+      "timezoneId": "Europe/Warsaw",
+      "viewport": { "width": 1920, "height": 1080 }
+    }
+  },
+  "server": {
+    "port": 8931,
+    "host": "0.0.0.0",
+    "allowedHosts": ["localhost:8931", "127.0.0.1:8931"]
+  },
+  "outputDir": "/home/node/output",
+  "console": { "level": "warning" }
+}

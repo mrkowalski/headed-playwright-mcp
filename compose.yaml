@@ -1,0 +1,21 @@
+services:
+  playwright-mcp:
+    build:
+      context: .
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:26-trixie-slim}
+        PLAYWRIGHT_MCP_VERSION: ${PLAYWRIGHT_MCP_VERSION:?set PLAYWRIGHT_MCP_VERSION in .env}
+    image: local/playwright-mcp:${PLAYWRIGHT_MCP_VERSION}
+    hostname: playwright-mcp
+    init: true # signal handling / zombie reaping for xvfb-run + chromium
+    restart: unless-stopped
+    shm_size: 1gb # headed Chromium crashes with Docker's default 64 MB /dev/shm
+    ports:
+      - "127.0.0.1:8931:8931"
+    volumes:
+      - ./playwright/config.json:/config/config.json:ro
+      - pw-profile:/home/node/profile   # persistent cookies/consents
+      - ./output:/home/node/output      # snapshots, screenshots (host dir must be writable by uid 1000)
+
+volumes:
+  pw-profile:
