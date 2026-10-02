@@ -13,7 +13,7 @@ services:
     ports:
       - "127.0.0.1:8931:8931"
     volumes:
-      - ./playwright/config.json:/config/config.json:ro
+      - ./config.json:/config/config.json:ro
       - pw-profile:/home/node/profile   # persistent cookies/consents
       - ./output:/home/node/output      # snapshots, screenshots (host dir must be writable by uid 1000)
 
