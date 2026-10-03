@@ -17,6 +17,6 @@
     "host": "0.0.0.0",
     "allowedHosts": ["localhost:8931", "127.0.0.1:8931"]
   },
-  "outputDir": "/home/node/output",
+  "outputDir": "/home/node/browser_output",
   "console": { "level": "warning" }
 }

@@ -17,7 +17,7 @@ RUN test -n "${PLAYWRIGHT_MCP_VERSION}" || { echo "PLAYWRIGHT_MCP_VERSION not se
  && apt-get install -y --no-install-recommends xvfb xauth \
  # fail the build early if the bin name changes between releases
  && command -v playwright-mcp \
- && mkdir -p /home/node/profile /home/node/output \
+ && mkdir -p /home/node/profile /home/node/browser_output \
  && chown -R node:node /home/node \
  && npm cache clean --force \
  && rm -rf /var/lib/apt/lists/* /tmp/*
