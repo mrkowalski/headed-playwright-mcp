@@ -1,9 +1,7 @@
 # syntax=docker/dockerfile:1
-# Playwright MCP + headed Chromium under Xvfb, HTTP transport on :8931.
 
 FROM node:26-trixie-slim
 
-# Pin explicitly: `npm view @playwright/mcp version`
 ARG PLAYWRIGHT_MCP_VERSION
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
@@ -26,7 +24,8 @@ USER node
 WORKDIR /home/node
 EXPOSE 8931
 
-ENTRYPOINT ["xvfb-run", "--auto-servernum", \
-            "--server-args=-screen 0 1920x1080x24 -nolisten tcp", \
-            "playwright-mcp"]
+# Clear stale Chromium Singleton* locks
+ENTRYPOINT ["sh", "-c", \
+            "rm -f /home/node/profile/Singleton* && exec xvfb-run --auto-servernum --server-args='-screen 0 1920x1080x24 -nolisten tcp' playwright-mcp \"$@\"", \
+            "--"]
 CMD ["--config", "/config/config.json"]
