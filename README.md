@@ -14,3 +14,15 @@ cp .env.example .env
 ```bash
 docker compose up -d
 ```
+
+## test
+
+```bash
+curl -i http://localhost:8931/mcp
+```
+
+This should return:
+
+```
+HTTP/1.1 400 Bad Request
+```

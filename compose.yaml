@@ -14,7 +14,12 @@ services:
     volumes:
       - ./config.json:/config/config.json:ro
       - pw-profile:/home/node/profile   # cookies, etc.
-      - ./browser_output:/home/node/browser_output # snapshots, screenshots
+      - type: bind # snapshots, screenshots
+        source: ./browser_output
+        target: /home/node/browser_output
+        bind:
+          create_host_path: false # fail instead of creating a root-owned dir the node user can't write to
 
 volumes:
   pw-profile:
+    name: headed-playwright-mcp_pw-profile # pinned: survives renaming/moving the project dir
